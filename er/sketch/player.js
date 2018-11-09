@@ -1,7 +1,7 @@
 class Player{
   
   constructor(brain){
-  this.y = height/2;
+  this.y = height -12.5;
   this.x = 25;
   
   this.gravity = 1;
@@ -10,24 +10,28 @@ class Player{
       
   this.score = 0;
   this.fitness = 0;
-  
+  this.in = 1;
+  this.hid = 2;
+  this.out = 2;
+
+      //If this object is created with a brain then copy it
       if(brain){
           this.brain = brain.copy();
       }else{
-            this.brain = new NeuralNetwork(1,2,2);
+          //Otherwise make a new brain
+            this.brain = new NeuralNetwork(this.in,this.hid,this.out);
       }
 
 }
     
-  
   show(){
     stroke(255);
-    fill(255,50);
+    fill(25,255,25,50);
     ellipse(this.x,this.y,25,25);
   }
     
   mutate(player){
-      this.brain.mutate(player);
+      this.brain.mutate(player,this.in,this.hid,this.out);
   }
   
   update(){
@@ -42,12 +46,14 @@ class Player{
       this.velocity = 0;
     }
   }
-    
+  
+  //Predicts what it should do then either jumps or doesnt
   think(pipes){
-      //find the closest pipe
+
       var closest = null;
       var closestD = Infinity;
       
+      //Determine closest pipe
       for (var i = 0; i <pipes.length; i++){
           var d = pipes[i].x - this.x;
           if (d < closestD && d > 0){
@@ -56,21 +62,17 @@ class Player{
           }
       }
       var inputs = [];
-      //Y position of player
-      //inputs[0] = this.y / height;
-      //X position of obstacle
-      inputs[0] = closest.x / width;
-      //How tall obstacle is
-      //inputs[1] = closest.top / height;
 
-      //var inputs = [1.0,0.5,0.2,0.4];
-      //console.log(inputs);
+      //X position of closest obstacle
+      inputs[0] = closest.x / width;
+      
       var output = this.brain.feedforward(inputs);
       if(output[1] > output[0]){
           this.jump();
       }
   }
   
+  //Makes player jump if they are grounded
   jump(){
     if(this.y == height -12.5){
       this.velocity += this.lift;

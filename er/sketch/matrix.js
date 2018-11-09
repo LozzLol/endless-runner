@@ -14,7 +14,8 @@ class Matrix{
       }
     }
     }
-    
+  
+  //Takes in array and turns it into a matrix
   static fromArray(arr){
     var m = new Matrix(arr.length,1);
     for(var i = 0; i < arr.length; i++){
@@ -22,7 +23,8 @@ class Matrix{
     }
     return m;
   }
-    
+  
+  //Takes in a matrix and turns it into an array
   toArray(arr){
     var arr = [];
     for(var i = 0; i < this.rows; i++){
@@ -34,6 +36,7 @@ class Matrix{
     return arr;
   }
   
+  //Transposes a matrix
   transpose(){
     var result = new Matrix(this.cols,this.rows);
     for(var i = 0; i < this.rows; i++){
@@ -45,7 +48,8 @@ class Matrix{
     return result;
   }
   
-   randomise(){
+  //Randomise values of a matrix
+  randomise(){
     for(var i = 0; i < this.rows; i++){
        for (var j = 0; j < this.cols; j++){
          //randomise every value between -1 and 1
@@ -53,7 +57,8 @@ class Matrix{
       }
     }
   }
-  
+ 
+  //Adds value to each cell of a matrix or adds matrix to a matrix
   add(n){
     
     if(n instanceof Matrix){
@@ -74,6 +79,7 @@ class Matrix{
     }
   }
   
+  //Multiplies two matrices, returning the matrix product
   static multiply(a,b){
     var result = new Matrix(a.rows, b.cols);
     for (var i = 0; i < result.rows; i++) {
@@ -89,9 +95,8 @@ class Matrix{
     return result;
   }
   
-    
+  //Applies a function to every value in a matrix 
   map(func){
-      //Apply function to every element of a matrix
       for(var i = 0; i < this.rows; i++){
        for (var j = 0; j < this.cols; j++){
          var val = this.data[i][j];

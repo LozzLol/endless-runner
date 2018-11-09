@@ -8,7 +8,7 @@ var cycles = 1;
 var lifeTime = 100;
 
 function setup() {
-createCanvas(1000,400);
+createCanvas(window.innerWidth,400);
     
     for(var i = 0; i < TOTAL; i++){
         players[i] = new Player();
@@ -20,18 +20,13 @@ counter2 = lifeTime;
 
 function draw() {
 
-    if(frameCount % 10 ==0){
-    counter2--;
-        //Countdown then reset
-        if(counter2 <= 0){
-            forceResetGame();
-        }
-  }
+
     //GAME LOGIC
     for (let n = 0; n < cycles;n++){
     if(counter % 60 ==0){
     pipes.push(new pipe());
   }
+        
     counter++;
     
     //Loop through array backwards
@@ -59,14 +54,22 @@ function draw() {
   players[i].update();
   }
 
+  //Lifetime counter
+  if(frameCount % 10 ==0){
+    counter2--;
+        //Countdown then reset
+        if(counter2 <= 0){
+            forceResetGame();
+        }
+  }
+        
   if(players.length == 0){
       resetGame();
   }
     }
   //DRAWING
     
-  background(20);
-
+  background(100);
   for (let player of players){
       player.show();
   }
@@ -92,6 +95,10 @@ function forceResetGame(){
                    players.splice(j,1);
                 }
       resetGame();
+}
+
+function updateSlider(value){
+    cycles = value;
 }
 
 /*function keyPressed(){
