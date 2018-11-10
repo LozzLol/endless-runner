@@ -30,8 +30,8 @@ class Player{
     ellipse(this.x,this.y,25,25);
   }
     
-  mutate(player){
-      this.brain.mutate(player,this.in,this.hid,this.out);
+  mutate(player,rate){
+      this.brain.mutate(player,rate,this.in,this.hid,this.out);
   }
   
   update(){

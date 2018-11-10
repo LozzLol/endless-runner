@@ -42,14 +42,20 @@ class NeuralNetwork{
   }
   
   //Mutates a child based on parents fitness
-  mutate(player,inputs,hidden,outputs) {
+  mutate(player,rate,inputs,hidden,outputs) {
     //Randomly check if this should be mutated
-    var rate = 1/(player.fitness*100);
-    
+    var mutationRate = 1/(player.fitness*(rate*1000));
       //Roll a dice and see if it should be mutated
-      if (Math.random() < rate) {
-       player.brain = new NeuralNetwork(1,2,2);
+      if (Math.random() < mutationRate) {
+       //Mutate full object
+       player.brain = new NeuralNetwork(player.in,player.hid,player.out);
       } 
+      
+      //TODO
+      //Roll a dice to see if first weight should be mutated
+      //Mutate weight based on its fitness (the more fit the smaller the mutation)
+
+      
   }
     
   //Feedforward function

@@ -1,7 +1,7 @@
 //variable that tracks the generation
 var gen = 1;
-//variable that tracks mutation rate
-var rate = 1;
+//variable that controls mutation chance
+var rate = 0.1;
 
 //Called when all players are eliminated in order to create a new generation
 function nextGeneration(){
@@ -86,7 +86,7 @@ function selection(){
     var child = new Player(player.brain);
     
     //Mutate the child based on fitness of parent
-    child.mutate(player);
+    child.mutate(player,rate);
     return child;
     
 }
