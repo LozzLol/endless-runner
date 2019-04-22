@@ -1,0 +1,6 @@
+Endless runner Neuroevolution Example
+
+
+This code was written by myself with a lot of help from Daniel Shiffman’s Nature of Code series.
+
+It uses random seeding so results won’t always be the same.
